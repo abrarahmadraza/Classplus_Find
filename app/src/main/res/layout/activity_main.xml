@@ -15,15 +15,7 @@
             android:background="@color/colorPrimary"
             app:layout_constraintTop_toTopOf="parent"
             app:title="Classplus Find"
-            app:titleTextColor="@color/white" >
-            <ImageView
-                android:id="@+id/signout"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginLeft="230dp"
-                app:srcCompat="@drawable/ic_logout"
-                app:tint="@color/white" />
-        </androidx.appcompat.widget.Toolbar>
+            app:titleTextColor="@color/white" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
