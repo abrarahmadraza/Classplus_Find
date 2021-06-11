@@ -1,10 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
+    <color name="colorAccent">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#7f67fc</color>
+    <color name="colorPrimaryDark">#5445a1</color>
+    <color name="purple_200">#FFBB86FC</color>
+
+    <!-- material colors -->
+    <color name="colorPrimaryWithAlpha">#80009ae0</color>
+    <color name="colorPrimaryWith10Alpha">#16009ae0</color>
+    <color name="colorPrimaryLight">#62cbff</color>
+    <color name="colorPrimaryText">#333333</color>
+    <color name="colorText">#AA000000</color>
+    <color name="colorSecondaryText">#7f7f7f</color>
+    <color name="colorSecondaryTextAlpha">#807f7f7f</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="feedback_bg">#FFF0E1</color>
+    <color name="live_class_card_bg">#F3FBFF</color>
+    <color name="theme_color">#009AE0</color>
+
+
+    <!-- Text colors -->
+    <color name="colorText_Black_Alpha_99">#99000000</color>
+
+    <!--
+        ######################################
+        for any colors refer to
+        http://www.color-hex.com/color-names.html
+        and also name the colors as same on the site for maintaining a standard
+        AND DO NOT ADD SIMILAR SHADES COLORS, RE-USE
+        #######################################
+    -->
+
+    <color name="white_ru">#D2E9FF</color>
+    <color name="green">#4ACC60</color>
+    <color name="pink">#6A2290</color>
+    <color name="yellow">#FF7F24</color>
+    <color name="pink_dark">#4B0082</color>
+    <color name="pink_transparent">#80FFCFD5</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="pending_red">#FFCFD5</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray79">#C9C9C9</color>
+    <color name="gray74">#C4C4C4</color>
+    <color name="grayCC">#CCC</color>
+    <color name="gray19">#303030</color>
+    <color name="gray91">#E8E8E8</color>
+    <color name="grayE5">#E5E5E5</color>
+    <color name="grayF1">#F1F1F1</color>
+    <color name="gray89">#e3e3e3</color>
+    <color name="gray100">#999999</color>
+    <color name="color_66009AE0">#66009AE0</color>
+
+    <color name="gray66">#666666</color>
+    <color name="gray90">#e5e5e5</color>
+    <color name="gray7A7A7A">#7A7A7A</color>
+
+    <color name="grayTransparent">#37C4B9B9</color>
+    <color name="background">#F7F8FA</color>
+    <color name="coupons_background">#F1F1F1</color>
+
+    <color name="lightred">#FDE9EC</color>
+    <color name="lightgreen">#E3FDE7</color>
+    <color name="red3">#cd0000</color>
+    <color name="ForestGreen">#228b22</color>
+    <color name="orange1">#ffa500</color>
+    <color name="royalblue">#1e88f5</color>
+    <color name="lightblue">#D6EFFA</color>
+    <color name="medblue">#BDEAFF</color>
+    <color name="color_online_test_background">#A2FFCE</color>
+    <color name="color_online_test_text_color">#34C176</color>
+    <color name="selectedblue">#2F4ABCFC</color>
+    <color name="line_grey">#E7E7E7</color>
+    <color name="fb">#3A5897</color>
+    <color name="bisque1">#ffe4c4</color>
+    <color name="chartreuse3">#66cd00</color>
+    <color name="tutor_pro">#FFDE48</color>
+    <color name="tutor_pro_light">#FFF3C1</color>
+    <color name="tutor_pro_light_text">#A28D39</color>
+    <color name="tutor_pro_light_alpha">#80FFF3C1</color>
+    <color name="shadow_black">#66000000</color>
+    <color name="black_translucent">#3d000000</color>
+    <color name="green_wp">#33CC66</color>
+    <color name="green_wpwithalpha">#1633CC66</color>
+    <color name="progress_background">#1A009AE0</color>
+    <color name="progress_front">#009AE0</color>
+    <color name="button_color">#009AE0</color>
+
+    <color name="link">#008DEA</color>
+    <color name="present_green">#34c176</color>
+    <color name="absent_red">#c13434</color>
+    <color name="red_FFEDF0">#FFEDF0</color>
+
+
+
+    <color name="update_status_add">#00FF00</color>
+    <color name="update_status_delete">#FF0000</color>
+
+    <color name="disable_send">#D3D3D3</color>
+
+
+    <!--Youtube Player Colors-->
+
+    <color name="ayp_red">#F44336</color>
+    <color name="ayp_item_selected">#90FFFFFF</color>
+    <color name="ayp_drop_shadow">#66000000</color>
+
+    <color name="ayp_menu_icons">#757575</color>
+    <color name="ayp_menu_text">#222222</color>
+
+    <color name="colorControlActivated">#1F009AE0</color>
+    <color name="colorControl">#009AE0</color>
+
+    <color name="faculty_background">#FFEAED</color>
+    <color name="faculty_text">#FF4058</color>
+    <color name="parent_background">#FAFBE9</color>
+    <color name="parent_text">#C2A42D</color>
+    <color name="admin_background">#E4FFE8</color>
+    <color name="admin_text">#52B062</color>
+
+    <!-- Home UI Reavamp-->
+    <color name="color_777777">#777777</color>
+    <color name="color_282828">#282828</color>
+    <color name="color_34C176">#34C176</color>
+    <color name="color_D4FFEA">#D4FFEA</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_99000000">#99000000</color>
+    <color name="color_DE000000">#DE000000</color>
+    <color name="color_D28800">#D28800</color>
+    <color name="color_FF4058">#FF4058</color>
+
+    <color name="progress_0_30">#F5122E</color>
+    <color name="progress_31_60">#FFA825</color>
+    <color name="progress_61_100">#52B062</color>
+    <color name="color_FF4C4C">#FF4C4C</color>
+    <color name="DE000000">#DE000000</color>
+    <color name="blue_1E88F5">#1E88F5</color>
+
+
+
+    <color name="gray_lightest">#DEDEDE</color>
+    <color name="gray_light">#CCCCCC</color>
+    <color name="gray">#989898</color>
+    <color name="gray_dark">#666666</color>
+    <color name="gray_deep_dark">#333333</color>
+
+    <color name="blue">#007AFF</color>
+    <color name="blue_medium">#44A2FC</color>
+    <color name="blue_light">#0ECFFF</color>
+    <color name="blue_alpha">#9CD9FF</color>
+    <color name="blue_alpha87">#DE009AE0</color>
+
+
+    <color name="dark_black">#CC262626</color>
+    <color name="black_half_transparent">#66000000</color>
+    <color name="black_full_transparent">#22000000</color>
+
+    <!-- Coupon UI-->
+    <color name="black_opaque">#DE000000</color>
+    <color name="filter_done">#FF4058</color>
+    <color name="tint_black">#000000</color>
+    <color name="grey_opaque">#99000000</color>
+    <color name="tint_blue">#0A009AE0</color>
+    <color name="bottomsheet_done_red">#E40000</color>
+    <color name="grayBottomsheetDescription">#999999</color>
+    <color name="coupon_dot_color">#EEEEEE</color>
+    <color name="type_text">#999777</color>
+    <color name="expired_strip">#FFD185</color>
+
+    <!--    My Library Colors-->
+
+    <color name="alice_blue">#E1F1FF</color>
+    <color name="primaryText">#1D2D3C</color> <!-- #f7f8ff, #f4f6ff-->
+    <!--<color name="colorSecondaryText">#33424f</color>-->
+    <color name="colorGreen">#52B062</color>
+    <color name="colorDarkGreen">#3C8849</color>
+    <color name="colorLightGreen">#E4FFE8</color>
+    <color name="colorTransparent50">#80000000</color>
+    <color name="colorTransparentWhite50">#80FFFFFF</color>
+    <color name="colorLightGray">#F5F5F5</color>
+    <color name="colorNextToWhite">#f9fcff</color>
+    <color name="colorSkyBlue">#009AE0</color>
+    <color name="colorHint">#ADE0FB</color>
+
+    <color name="colorRedPinkTint">#FF3958</color>
+    <color name="colorRed">#FF4E45</color>
+    <color name="colorLightYellow">#FFFFD5</color>
+    <color name="colorGrayBorder">#E5E5E5</color>
+    <color name="colorGray">#9E9E9E</color>
+
+    <color name="colorLightSkyBlue">#E0F5FF</color>
+    <color name="colorLightSkyBlue2">#A5E3FF</color>
+    <color name="colorLightRed">#FFE8F1</color>
+    <color name="color_F04C4C">#F04C4C</color>
+    <color name="color_07BD80">#07BD80</color>
 </resources>
