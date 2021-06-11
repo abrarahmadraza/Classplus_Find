@@ -10,8 +10,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SignInActivity"></activity>
-        <activity android:name=".ui.ChooseUserActivity" />
+        <activity android:name=".ui.signup.SignInActivity" />
+        <activity android:name=".ui.signup.ChooseUserActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustNothing"
+            />
     </application>
 
 </manifest>

@@ -13,8 +13,11 @@ import co.classplus_find.app.data.PreferenceHelper
 import co.classplus_find.app.data.PreferenceHelper.Companion.PREF_IS_TUTOR
 import co.classplus_find.app.databinding.ActivityMainBinding
 import co.classplus_find.app.ui.*
+import co.classplus_find.app.ui.student.SearchFragment
+import co.classplus_find.app.ui.student.StudentProfileFragment
+import co.classplus_find.app.ui.tutor.TimelineFragment
+import co.classplus_find.app.ui.tutor.TutorProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSelectedListener

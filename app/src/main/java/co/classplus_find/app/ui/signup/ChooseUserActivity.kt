@@ -1,4 +1,4 @@
-package co.classplus_find.app.ui
+package co.classplus_find.app.ui.signup
 
 import android.content.Context
 import android.content.Intent

@@ -1,4 +1,4 @@
-package co.classplus_find.app.ui
+package co.classplus_find.app.ui.tutor
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import co.classplus_find.app.R
-import co.classplus_find.app.databinding.FragmentChatBinding
 import co.classplus_find.app.databinding.FragmentTimelineBinding
-import co.classplus_find.app.databinding.FragmentTutorProfileBinding
 
 class TimelineFragment: Fragment() {
 

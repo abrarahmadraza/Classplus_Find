@@ -1,4 +1,4 @@
-package co.classplus_find.app.ui
+package co.classplus_find.app.ui.student
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,15 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import co.classplus_find.app.R
-import co.classplus_find.app.databinding.FragmentStudentProfileBinding
-import co.classplus_find.app.databinding.FragmentTutorProfileBinding
+import co.classplus_find.app.databinding.FragmentSearchBinding
 
-class StudentProfileFragment : Fragment() {
+class SearchFragment : Fragment() {
 
-    lateinit var binding: FragmentStudentProfileBinding
+    lateinit var binding: FragmentSearchBinding
 
     companion object{
-        fun newInstance() = StudentProfileFragment().apply {
+        fun newInstance() = SearchFragment().apply {
             arguments = Bundle().apply {
             }
         }
@@ -25,7 +24,7 @@ class StudentProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_student_profile, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_search, container, false)
         binding.lifecycleOwner = activity
         return binding.root
     }
