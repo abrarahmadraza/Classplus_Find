@@ -1,6 +1,7 @@
 package co.classplus_find.app
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
@@ -13,11 +14,14 @@ import co.classplus_find.app.data.PreferenceHelper
 import co.classplus_find.app.data.PreferenceHelper.Companion.PREF_IS_TUTOR
 import co.classplus_find.app.databinding.ActivityMainBinding
 import co.classplus_find.app.ui.*
+import co.classplus_find.app.ui.signup.ChooseUserActivity
 import co.classplus_find.app.ui.student.SearchFragment
 import co.classplus_find.app.ui.student.StudentProfileFragment
 import co.classplus_find.app.ui.tutor.TimelineFragment
 import co.classplus_find.app.ui.tutor.TutorProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSelectedListener
@@ -32,6 +36,16 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setupData()
         setupUi()
+        setupListeners()
+    }
+
+    private fun setupListeners(){
+        binding.signout.setOnClickListener{
+            Firebase.auth.signOut()
+            val intent = Intent(this, ChooseUserActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setupUi(){
