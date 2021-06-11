@@ -7,8 +7,8 @@
 
     <item
         android:id="@+id/fire"
-        android:icon="@drawable/fire"
-        android:title="Search" />
+        android:icon="@drawable/ic_classplus"
+        android:title="Feeds" />
 
     <item
         android:id="@+id/chat"
