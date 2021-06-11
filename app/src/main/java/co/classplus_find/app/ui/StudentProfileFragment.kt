@@ -7,14 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import co.classplus_find.app.R
+import co.classplus_find.app.databinding.FragmentStudentProfileBinding
 import co.classplus_find.app.databinding.FragmentTutorProfileBinding
 
-class TutorProfileFragment : Fragment() {
+class StudentProfileFragment : Fragment() {
 
-    lateinit var binding: FragmentTutorProfileBinding
+    lateinit var binding: FragmentStudentProfileBinding
 
     companion object{
-        fun newInstance() = TutorProfileFragment().apply {
+        fun newInstance() = StudentProfileFragment().apply {
             arguments = Bundle().apply {
             }
         }
@@ -24,7 +25,7 @@ class TutorProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_tutor_profile, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_student_profile, container, false)
         binding.lifecycleOwner = activity
         return binding.root
     }

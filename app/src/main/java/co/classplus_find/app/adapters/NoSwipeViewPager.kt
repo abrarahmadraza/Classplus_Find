@@ -1,4 +1,4 @@
-package co.classplus_find.app.ui
+package co.classplus_find.app.adapters
 
 import android.content.Context
 import android.util.AttributeSet

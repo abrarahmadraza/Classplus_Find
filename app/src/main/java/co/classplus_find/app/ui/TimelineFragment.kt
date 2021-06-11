@@ -7,14 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import co.classplus_find.app.R
+import co.classplus_find.app.databinding.FragmentChatBinding
+import co.classplus_find.app.databinding.FragmentTimelineBinding
 import co.classplus_find.app.databinding.FragmentTutorProfileBinding
 
-class TutorProfileFragment : Fragment() {
+class TimelineFragment: Fragment() {
 
-    lateinit var binding: FragmentTutorProfileBinding
+    lateinit var binding: FragmentTimelineBinding
 
     companion object{
-        fun newInstance() = TutorProfileFragment().apply {
+        fun newInstance() = TimelineFragment().apply {
             arguments = Bundle().apply {
             }
         }
@@ -24,7 +26,7 @@ class TutorProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_tutor_profile, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_timeline, container, false)
         binding.lifecycleOwner = activity
         return binding.root
     }

@@ -27,7 +27,7 @@
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <co.classplus_find.app.ui.NoSwipeViewPager
+        <co.classplus_find.app.adapters.NoSwipeViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
