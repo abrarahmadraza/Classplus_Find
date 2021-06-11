@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import co.classplus_find.app.R
+import co.classplus_find.app.adapters.TagsAdapter
 import co.classplus_find.app.data.PreferenceHelper
 import co.classplus_find.app.data.PreferenceHelper.Companion.PREF_IS_TUTOR
 import co.classplus_find.app.databinding.FragmentTutorProfileBinding
@@ -19,16 +21,20 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 
-class TutorProfileFragment : Fragment() {
+class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
 
     lateinit var binding: FragmentTutorProfileBinding
     var ref: DatabaseReference? = null
     private lateinit var mPrefs : SharedPreferences
+    var tagsAdapter: TagsAdapter? = null
 
 
+    var tagList: ArrayList<String> = ArrayList()
     var role=""
     var user:FirebaseUser?=null
-    var displayName =""
+    var designationText =""
+    var aboutMe=""
+    var highestEducation=""
 
     companion object{
         fun newInstance() = TutorProfileFragment().apply {
@@ -51,6 +57,7 @@ class TutorProfileFragment : Fragment() {
 
         setupData()
         setupListeners()
+        setupRecyclerView()
     }
 
     private fun setupData(){
@@ -65,14 +72,84 @@ class TutorProfileFragment : Fragment() {
     }
 
     private fun setupListeners(){
+        setupEdit()
 
+        ref!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    if (snapshot.child("photoUrl").exists()) {
+                        binding.pic?.let {
+                            activity?.let { it1 ->
+                                Glide.with(it1)
+                                    .load(snapshot.child("photoUrl").value)
+                                    .placeholder(R.drawable.profile_pic)
+                                    .error(R.drawable.profile_pic)
+                                    .into(it)
+                            }
+                        }
+                    }
+                    if (snapshot.child("name").exists()) {
+                        binding.name?.text=snapshot.child("name").value.toString()
+                    }
+                    if(snapshot.child("designation").exists()){
+                        designationText = snapshot.child("designation").value.toString()
+                        binding.designation?.text=designationText
+                    }
+                    if(snapshot.child("tag").exists()){
+                        tagList = snapshot.child("tag").value as ArrayList<String>
+                        tagsAdapter?.setList(tagList)
+                    }
+                    if (snapshot.child("phone").exists()) {
+                        binding.phone?.text=snapshot.child("phone").value.toString()
+                    }
+                    if (snapshot.child("location").exists()) {
+                        binding.location?.text=snapshot.child("location").value.toString()
+                    }
+                    if (snapshot.child("aboutMe").exists()) {
+                        aboutMe=snapshot.child("aboutMe").value.toString()
+                        binding.aboutText.text=aboutMe
+                    }
+                    if (snapshot.child("highestEducation").exists()) {
+                        highestEducation=snapshot.child("highestEducation").value.toString()
+                        binding.highestEduText.text=highestEducation
+                    }
+                    binding.email?.text=user?.email.toString()
+
+                }else{
+
+                    ref?.child("name")?.setValue(user?.displayName.toString())
+                    ref?.child("photoUrl")?.setValue(user?.photoUrl.toString())
+                    ref?.child("phone")?.setValue("---")
+                    ref?.child("designation")?.setValue("Teacher")
+                    ref?.child("location")?.setValue("---")
+                    ref?.child("aboutMe")?.setValue("")
+                    ref?.child("highestEducation")?.setValue("")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    private fun setupRecyclerView(){
+        tagsAdapter = TagsAdapter(this, ArrayList())
+
+        binding.rvTags.apply {
+            layoutManager = StaggeredGridLayoutManager(3,LinearLayout.HORIZONTAL)
+            adapter = tagsAdapter
+            setHasFixedSize(true)
+        }
+
+    }
+
+    private fun setupEdit(){
         binding.nameEdit?.setOnClickListener(View.OnClickListener { item: View? ->
             val builder =
                 AlertDialog.Builder(activity)
             val view: View =
                 LayoutInflater.from(activity).inflate(R.layout.name_edit, null)
             val editText = view.findViewById<EditText>(R.id.newName)
-            editText.setText(displayName)
+            editText.setText(designationText)
             val submit =
                 view.findViewById<Button>(R.id.submit)
             builder.setView(view)
@@ -80,9 +157,9 @@ class TutorProfileFragment : Fragment() {
             submit.setOnClickListener { item1: View? ->
                 var nameVal=""+editText.text.toString()
                 if (nameVal != "") {
-                    ref!!.child("name").setValue(nameVal)
+                    ref!!.child("designation").setValue(nameVal)
                         .addOnCompleteListener {
-                            binding.name?.setText(nameVal)
+                            binding.designation?.setText(nameVal)
                             Toast.makeText(
                                 activity,
                                 "Updated!",
@@ -101,42 +178,117 @@ class TutorProfileFragment : Fragment() {
             dialog.show()
         })
 
-        ref!!.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    if (snapshot.child("photoUrl").exists()) {
-                        binding.pic?.let {
-                            activity?.let { it1 ->
-                                Glide.with(it1)
-                                    .load(snapshot.child("photoUrl").value)
-                                    .placeholder(R.drawable.profile_pic)
-                                    .error(R.drawable.profile_pic)
-                                    .into(it)
-                            }
+        binding.aboutEdit.setOnClickListener {
+            val builder =
+                AlertDialog.Builder(activity)
+            val view: View =
+                LayoutInflater.from(activity).inflate(R.layout.name_edit, null)
+            val editText = view.findViewById<EditText>(R.id.newName)
+            editText.setText(aboutMe)
+            val submit =
+                view.findViewById<Button>(R.id.submit)
+            view.findViewById<TextView>(R.id.label).text="About me"
+            builder.setView(view)
+            val dialog = builder.create()
+            submit.setOnClickListener { item1: View? ->
+                var nameVal=""+editText.text.toString()
+                if (nameVal != "") {
+                    ref!!.child("aboutMe").setValue(nameVal)
+                        .addOnCompleteListener {
+                            binding.aboutText?.setText(nameVal)
+                            Toast.makeText(
+                                activity,
+                                "Updated!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dialog.dismiss()
                         }
-                    }
-                    if (snapshot.child("name").exists()) {
-                        displayName = snapshot.child("name").value.toString()
-                        binding.name?.text=displayName
-                    }
-                    if (snapshot.child("phone").exists()) {
-                        binding.phone?.text=snapshot.child("phone").value.toString()
-                    }
-                    if (snapshot.child("location").exists()) {
-                        binding.location?.text=snapshot.child("location").value.toString()
-                    }
-                    binding.email?.text=user?.email.toString()
-
-                }else{
-
-                    ref?.child("name")?.setValue(user?.displayName.toString())
-                    ref?.child("photoUrl")?.setValue(user?.photoUrl.toString())
-                    ref?.child("phone")?.setValue("---")
-                    ref?.child("location")?.setValue("---")
+                } else {
+                    Toast.makeText(
+                        activity,
+                        "Field can not be empty!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+            dialog.show()
+        }
 
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        binding.eduEdit.setOnClickListener {
+            val builder =
+                AlertDialog.Builder(activity)
+            val view: View =
+                LayoutInflater.from(activity).inflate(R.layout.name_edit, null)
+            val editText = view.findViewById<EditText>(R.id.newName)
+            editText.setText(highestEducation)
+            val submit =
+                view.findViewById<Button>(R.id.submit)
+            view.findViewById<TextView>(R.id.label).text="Highest Education"
+            builder.setView(view)
+            val dialog = builder.create()
+            submit.setOnClickListener { item1: View? ->
+                var nameVal=""+editText.text.toString()
+                if (nameVal != "") {
+                    ref!!.child("highestEducation").setValue(nameVal)
+                        .addOnCompleteListener {
+                            binding.highestEduText?.setText(nameVal)
+                            Toast.makeText(
+                                activity,
+                                "Updated!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dialog.dismiss()
+                        }
+                } else {
+                    Toast.makeText(
+                        activity,
+                        "Field can not be empty!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            dialog.show()
+        }
+
+        binding.addTag.setOnClickListener {
+            val builder =
+                AlertDialog.Builder(activity)
+            val view: View =
+                LayoutInflater.from(activity).inflate(R.layout.name_edit, null)
+            val editText = view.findViewById<EditText>(R.id.newName)
+            editText.setText("")
+            val submit =
+                view.findViewById<Button>(R.id.submit)
+            view.findViewById<TextView>(R.id.label).text="Add Tag"
+            builder.setView(view)
+            val dialog = builder.create()
+            submit.setOnClickListener { item1: View? ->
+                var nameVal=""+editText.text.toString()
+                if (nameVal != "") {
+                    tagList.add(nameVal)
+                    ref!!.child("tag").setValue(tagList)
+                        .addOnCompleteListener {
+                            Toast.makeText(
+                                activity,
+                                "Updated!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            tagsAdapter?.setList(tagList)
+                            dialog.dismiss()
+                        }
+                } else {
+                    Toast.makeText(
+                        activity,
+                        "Field can not be empty!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            dialog.show()
+        }
+    }
+
+    override fun onTagRemoved(tagList: ArrayList<String>, adapterPosition: Int) {
+        ref?.child("tag")?.setValue(tagList)
     }
 }

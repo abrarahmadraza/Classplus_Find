@@ -14,7 +14,7 @@ import co.classplus_find.app.adapters.ViewPagerAdapter
 import co.classplus_find.app.data.PreferenceHelper
 import co.classplus_find.app.data.PreferenceHelper.Companion.PREF_IS_TUTOR
 import co.classplus_find.app.databinding.ActivityMainBinding
-import co.classplus_find.app.ui.*
+import co.classplus_find.app.ui.chat.ChatFragment
 import co.classplus_find.app.ui.signup.ChooseUserActivity
 import co.classplus_find.app.ui.student.SearchFragment
 import co.classplus_find.app.ui.student.StudentProfileFragment
