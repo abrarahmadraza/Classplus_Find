@@ -89,7 +89,7 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
                         }
                     }
                     if (snapshot.child("name").exists()) {
-                        binding.name?.text=snapshot.child("name").value.toString()
+                        binding.name?.text= snapshot.child("name").value.toString()
                     }
                     if(snapshot.child("designation").exists()){
                         designationText = snapshot.child("designation").value.toString()
@@ -97,7 +97,13 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
                     }
                     if(snapshot.child("tag").exists()){
                         tagList = snapshot.child("tag").value as ArrayList<String>
-                        tagsAdapter?.setList(tagList)
+                        if(tagList.size > 0) {
+                            binding.tagEmpty.visibility = View.GONE
+                            tagsAdapter?.setList(tagList)
+                        }
+                        else{
+                            binding.tagEmpty.visibility = View.VISIBLE
+                        }
                     }
                     if (snapshot.child("phone").exists()) {
                         binding.phone?.text=snapshot.child("phone").value.toString()
@@ -119,11 +125,11 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
 
                     ref?.child("name")?.setValue(user?.displayName.toString())
                     ref?.child("photoUrl")?.setValue(user?.photoUrl.toString())
-                    ref?.child("phone")?.setValue("---")
+                    ref?.child("phone")?.setValue("Enter phone number")
                     ref?.child("designation")?.setValue("Teacher")
-                    ref?.child("location")?.setValue("---")
-                    ref?.child("aboutMe")?.setValue("")
-                    ref?.child("highestEducation")?.setValue("")
+                    ref?.child("location")?.setValue("Select Location")
+                    ref?.child("aboutMe")?.setValue("Tell students about you")
+                    ref?.child("highestEducation")?.setValue("Education")
                 }
             }
 

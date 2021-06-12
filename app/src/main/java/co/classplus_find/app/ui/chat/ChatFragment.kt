@@ -63,11 +63,16 @@ class ChatFragment: Fragment() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                binding.container.removeAllViews()
-                for(snap in snapshot.children){
-                    if(snap.key.toString().contains(uid)){
-                        make_item(snap)
+                if(snapshot.exists()){
+                    binding.container.removeAllViews()
+                    for(snap in snapshot.children){
+                        if(snap.key.toString().contains(uid)){
+                            make_item(snap)
+                        }
                     }
+                    binding.emptyState.visibility = View.GONE
+                }else{
+                    binding.emptyState.visibility = View.VISIBLE
                 }
             }
         })
