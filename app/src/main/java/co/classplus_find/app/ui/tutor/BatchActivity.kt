@@ -15,6 +15,7 @@ import co.classplus_find.app.data.PreferenceHelper
 import co.classplus_find.app.data.models.BatchModel
 import co.classplus_find.app.databinding.ActivityBatchBinding
 import co.classplus_find.app.databinding.FragmentTutorProfileBinding
+import co.classplus_find.app.ui.tutor.TutorProfileFragment.Companion.PARAM_UID
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -28,7 +29,15 @@ class BatchActivity : AppCompatActivity() {
     private lateinit var mPrefs : SharedPreferences
     var user: FirebaseUser?=null
 
+    var uid: String? = null
+
+    var showAction: Int = 0
+
     var batchList: ArrayList<BatchModel> = ArrayList()
+
+    companion object{
+        var PARAM_SHOW_ACTION = "PARAM_SHOW_ACTION"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,14 +51,22 @@ class BatchActivity : AppCompatActivity() {
     private fun setupData(){
         mPrefs = this.getSharedPreferences(PreferenceHelper.PREF_FILE, Context.MODE_PRIVATE)
 
+        uid = intent.getStringExtra(PARAM_UID)
+
         ref = FirebaseDatabase.getInstance()
-            .getReference("users/" + FirebaseAuth.getInstance().currentUser!!.uid+"/teacher")
+            .getReference("users/" + uid+"/teacher")
+
+        showAction = intent.getIntExtra(PARAM_SHOW_ACTION,0)
+
+        if(showAction == 1){
+            binding.addPost.visibility = View.GONE
+        }
 
         user= FirebaseAuth.getInstance().currentUser
     }
 
     private fun setupUi(){
-        batchAdapter = BatchAdapter(this,ArrayList(),1)
+        batchAdapter = BatchAdapter(this,ArrayList(),showAction)
 
         binding.rvPosts.apply {
             layoutManager = LinearLayoutManager(this@BatchActivity)

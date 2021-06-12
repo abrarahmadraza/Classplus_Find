@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import co.classplus_find.app.R
 import co.classplus_find.app.data.models.BatchModel
 import co.classplus_find.app.databinding.ItemBatchBinding
 
-class BatchAdapter(var context: Context, var batchList: ArrayList<BatchModel>, var isTutor: Int) : RecyclerView.Adapter<BatchAdapter.BatchViewHolder>() {
+class BatchAdapter(var context: Context, var batchList: ArrayList<BatchModel>, var showAction: Int) : RecyclerView.Adapter<BatchAdapter.BatchViewHolder>() {
 
     private lateinit var onBatchJoined: OnBatchJoined
 
@@ -45,11 +44,11 @@ class BatchAdapter(var context: Context, var batchList: ArrayList<BatchModel>, v
             desc.text = batch.description
             date.text = batch.date
 
-            if(isTutor == 1){
-                join.visibility = View.GONE
+            if(showAction == 1){
+                join.visibility = View.VISIBLE
             }
             else{
-                join.visibility = View.VISIBLE
+                join.visibility = View.GONE
             }
 
             holder.join.setOnClickListener {

@@ -8,6 +8,7 @@ class PreferenceHelper {
         const val PREF_FILE = "clsfind"
         const val PREF_IS_LOGGED_IN = "PREF_IS_LOGGED_IN"
         const val PREF_IS_TUTOR = "PREF_IS_TUTOR"
+        const val PREF_DISTANCE = "PREF_DISTANCE"
     }
 
 //    init {

@@ -18,6 +18,7 @@ import co.classplus_find.app.adapters.TagsAdapter
 import co.classplus_find.app.data.PreferenceHelper
 import co.classplus_find.app.data.PreferenceHelper.Companion.PREF_IS_TUTOR
 import co.classplus_find.app.databinding.FragmentTutorProfileBinding
+import co.classplus_find.app.ui.tutor.BatchActivity.Companion.PARAM_SHOW_ACTION
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -31,6 +32,9 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
     var tagsAdapter: TagsAdapter? = null
 
 
+    var uid: String? = null
+
+    var showAction: Int = 0
     var tagList: ArrayList<String> = ArrayList()
     var role=""
     var user:FirebaseUser?=null
@@ -39,8 +43,10 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
     var highestEducation=""
 
     companion object{
-        fun newInstance() = TutorProfileFragment().apply {
+        var PARAM_UID  = "PARAM_UID"
+        fun newInstance(uid: String? = null) = TutorProfileFragment().apply {
             arguments = Bundle().apply {
+                putString(PARAM_UID,uid)
             }
         }
     }
@@ -67,8 +73,23 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
 
         role=if(mPrefs.getInt(PREF_IS_TUTOR,-1) == 1) "teacher" else "student"
 
-        ref = FirebaseDatabase.getInstance()
-            .getReference("users/" + FirebaseAuth.getInstance().currentUser!!.uid+"/"+role)
+        if(arguments?.getString(TimelineFragment.PARAM_UID) != null){
+            uid = arguments?.getString(TimelineFragment.PARAM_UID)
+            ref = FirebaseDatabase.getInstance()
+                .getReference("users/" +uid+"/"+role)
+            binding.apply {
+                aboutEdit.visibility = View.GONE
+                eduEdit.visibility = View.GONE
+                addTag.visibility = View.GONE
+                nameEdit.visibility = View.GONE
+            }
+            showAction = 1
+        }
+        else {
+            uid = FirebaseAuth.getInstance().currentUser!!.uid
+            ref = FirebaseDatabase.getInstance()
+                .getReference("users/" + uid + "/" + role)
+        }
 
         user=FirebaseAuth.getInstance().currentUser
     }
@@ -78,11 +99,15 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
 
         binding.batches.setOnClickListener {
             val intent = Intent(requireContext(), BatchActivity::class.java)
+                .putExtra(PARAM_SHOW_ACTION,showAction)
+                .putExtra(PARAM_UID,uid)
             startActivity(intent)
         }
 
         binding.courses.setOnClickListener {
             val intent = Intent(requireContext(), CourseActivity::class.java)
+                .putExtra(PARAM_SHOW_ACTION,showAction)
+                .putExtra(PARAM_UID,uid)
             startActivity(intent)
         }
 

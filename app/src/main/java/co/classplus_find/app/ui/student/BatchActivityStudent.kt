@@ -1,4 +1,4 @@
-package co.classplus_find.app.ui.tutor
+package co.classplus_find.app.ui.student
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,38 +9,26 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.classplus_find.app.R
 import co.classplus_find.app.adapters.BatchAdapter
-import co.classplus_find.app.adapters.CourseAdapter
 import co.classplus_find.app.data.PreferenceHelper
 import co.classplus_find.app.data.models.BatchModel
-import co.classplus_find.app.data.models.CourseModel
 import co.classplus_find.app.databinding.ActivityBatchBinding
-import co.classplus_find.app.databinding.ActivityCourseBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 
-class CourseActivity : AppCompatActivity() {
+class BatchActivityStudent : AppCompatActivity() {
 
-    lateinit var binding: ActivityCourseBinding
-    lateinit var courseAdapter: CourseAdapter
+    lateinit var binding: ActivityBatchBinding
+    lateinit var batchAdapter: BatchAdapter
     var ref: DatabaseReference? = null
     private lateinit var mPrefs : SharedPreferences
     var user: FirebaseUser?=null
 
-
-    var uid: String? = null
-
-    var showAction: Int = 0
-
-    var courseList: ArrayList<CourseModel> = ArrayList()
-
-    companion object{
-        var PARAM_SHOW_ACTION = "PARAM_SHOW_ACTION"
-    }
+    var batchList: ArrayList<BatchModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_course)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_batch)
         setupData()
         setupUi()
         setupListeners()
@@ -50,47 +38,40 @@ class CourseActivity : AppCompatActivity() {
     private fun setupData(){
         mPrefs = this.getSharedPreferences(PreferenceHelper.PREF_FILE, Context.MODE_PRIVATE)
 
-
-        uid = intent.getStringExtra(TutorProfileFragment.PARAM_UID)
-
         ref = FirebaseDatabase.getInstance()
-            .getReference("users/" + uid+"/teacher")
-
-        showAction = intent.getIntExtra(BatchActivity.PARAM_SHOW_ACTION,0)
-
-        if(showAction == 1){
-            binding.addPost.visibility = View.GONE
-        }
+            .getReference("users/" + FirebaseAuth.getInstance().currentUser!!.uid+"/student")
 
         user= FirebaseAuth.getInstance().currentUser
     }
 
     private fun setupUi(){
-        courseAdapter = CourseAdapter(this,ArrayList(),showAction)
+        batchAdapter = BatchAdapter(this,ArrayList(),0)
+
+        binding.addPost.visibility = View.GONE
 
         binding.rvPosts.apply {
-            layoutManager = LinearLayoutManager(this@CourseActivity)
-            adapter = courseAdapter
+            layoutManager = LinearLayoutManager(this@BatchActivityStudent)
+            adapter = batchAdapter
             setHasFixedSize(true)
         }
     }
 
-    fun setupRemote(){
+    private fun setupRemote(){
         ref!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    if (snapshot.child("courses").exists()) {
-                        courseList.clear()
-                        for (snap in snapshot.child("courses").children){
-                            courseList.add(CourseModel(snap.child("name").value.toString(),
+                    if (snapshot.child("batches").exists()) {
+                        batchList.clear()
+                        for (snap in snapshot.child("batches").children){
+                            batchList.add(BatchModel(snap.child("name").value.toString(),
                                 snap.child("description").value.toString(),
-                                snap.child("price").value.toString()
+                                snap.child("date").value.toString()
                             ))
                         }
 
-                        if(courseList.size > 0){
+                        if(batchList.size > 0){
                             binding.rvPosts.visibility = View.VISIBLE
-                            courseAdapter.setList(courseList)
+                            batchAdapter.setList(batchList)
                             binding.emptyState.visibility = View.GONE
                         }
                         else{
@@ -115,8 +96,8 @@ class CourseActivity : AppCompatActivity() {
     }
 
     private fun createPost(){
-        courseList.add(CourseModel("11th batch","New batch for class 11", "500"))
+        batchList.add(BatchModel("11th batch","New batch for class 11", "12-10-21"))
 
-        ref?.child("courses")?.setValue(courseList)
+        ref?.child("batches")?.setValue(batchList)
     }
 }

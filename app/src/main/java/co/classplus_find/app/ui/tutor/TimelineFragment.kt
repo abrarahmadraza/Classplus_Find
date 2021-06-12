@@ -59,8 +59,10 @@ class TimelineFragment: Fragment() {
     var pic: ImageView? = null
 
     companion object{
-        fun newInstance() = TimelineFragment().apply {
+        var PARAM_UID  = "PARAM_UID"
+        fun newInstance(uid: String? = null) = TimelineFragment().apply {
             arguments = Bundle().apply {
+                putString(PARAM_UID,uid)
             }
         }
     }
@@ -217,8 +219,15 @@ class TimelineFragment: Fragment() {
 
         role=if(mPrefs.getInt(PreferenceHelper.PREF_IS_TUTOR,-1) == 1) "teacher" else "student"
 
-        ref = FirebaseDatabase.getInstance()
-            .getReference("users/" + FirebaseAuth.getInstance().currentUser!!.uid+"/"+role)
+        if(arguments?.getString(PARAM_UID) != null){
+            ref = FirebaseDatabase.getInstance()
+                .getReference("users/" + arguments?.getString(PARAM_UID)+"/"+role)
+            binding.addPost1.visibility = View.GONE
+        }
+        else {
+            ref = FirebaseDatabase.getInstance()
+                .getReference("users/" + FirebaseAuth.getInstance().currentUser!!.uid + "/" + role)
+        }
 
         user= FirebaseAuth.getInstance().currentUser
     }

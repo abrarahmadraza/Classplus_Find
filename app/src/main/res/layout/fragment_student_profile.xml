@@ -105,17 +105,19 @@
                         android:paddingBottom="10dp">
 
                         <LinearLayout
+                            android:id="@+id/batches"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/border"
                             android:layout_weight="2"
+                            android:layout_marginHorizontal="10dp"
                             android:gravity="center"
                             android:padding="8dp">
 
                             <ImageView
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:background="@drawable/circular_grey_bordersolid"
-                                android:padding="10dp"/>
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/ic_batch" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -128,22 +130,24 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
                                     android:text="Batches"
-                                    android:textSize="12sp" />
+                                    android:textSize="16dp" />
                             </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/courses"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/border"
+                            android:layout_marginHorizontal="10dp"
                             android:layout_weight="2"
                             android:gravity="center"
                             android:padding="8dp">
 
                             <ImageView
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:background="@drawable/circular_grey_bordersolid"
-                                android:padding="10dp" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/ic_course" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -156,7 +160,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
                                     android:text="Courses"
-                                    android:textSize="12sp" />
+                                    android:textSize="16sp" />
                             </LinearLayout>
                         </LinearLayout>
 

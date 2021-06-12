@@ -56,7 +56,7 @@ class ChatActivity : AppCompatActivity() {
                     if(snapshot.child("designation").exists())
                         findViewById<TextView>(R.id.designation).text=snapshot.child("designation").value.toString()
                     else
-                        findViewById<TextView>(R.id.name).visibility= View.GONE
+                        findViewById<TextView>(R.id.designation).visibility= View.GONE
                     if(snapshot.child("photoUrl").exists())
                     {
                         Glide.with(this@ChatActivity)

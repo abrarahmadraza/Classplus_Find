@@ -1,4 +1,4 @@
-package co.classplus_find.app.ui.tutor
+package co.classplus_find.app.ui.student
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -8,18 +8,15 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.classplus_find.app.R
-import co.classplus_find.app.adapters.BatchAdapter
 import co.classplus_find.app.adapters.CourseAdapter
 import co.classplus_find.app.data.PreferenceHelper
-import co.classplus_find.app.data.models.BatchModel
 import co.classplus_find.app.data.models.CourseModel
-import co.classplus_find.app.databinding.ActivityBatchBinding
 import co.classplus_find.app.databinding.ActivityCourseBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 
-class CourseActivity : AppCompatActivity() {
+class CourseActivityStudent : AppCompatActivity() {
 
     lateinit var binding: ActivityCourseBinding
     lateinit var courseAdapter: CourseAdapter
@@ -27,16 +24,7 @@ class CourseActivity : AppCompatActivity() {
     private lateinit var mPrefs : SharedPreferences
     var user: FirebaseUser?=null
 
-
-    var uid: String? = null
-
-    var showAction: Int = 0
-
     var courseList: ArrayList<CourseModel> = ArrayList()
-
-    companion object{
-        var PARAM_SHOW_ACTION = "PARAM_SHOW_ACTION"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,26 +38,19 @@ class CourseActivity : AppCompatActivity() {
     private fun setupData(){
         mPrefs = this.getSharedPreferences(PreferenceHelper.PREF_FILE, Context.MODE_PRIVATE)
 
-
-        uid = intent.getStringExtra(TutorProfileFragment.PARAM_UID)
-
         ref = FirebaseDatabase.getInstance()
-            .getReference("users/" + uid+"/teacher")
-
-        showAction = intent.getIntExtra(BatchActivity.PARAM_SHOW_ACTION,0)
-
-        if(showAction == 1){
-            binding.addPost.visibility = View.GONE
-        }
+            .getReference("users/" + FirebaseAuth.getInstance().currentUser!!.uid+"/student")
 
         user= FirebaseAuth.getInstance().currentUser
     }
 
     private fun setupUi(){
-        courseAdapter = CourseAdapter(this,ArrayList(),showAction)
+        courseAdapter = CourseAdapter(this,ArrayList(),0)
+
+        binding.addPost.visibility = View.GONE
 
         binding.rvPosts.apply {
-            layoutManager = LinearLayoutManager(this@CourseActivity)
+            layoutManager = LinearLayoutManager(this@CourseActivityStudent)
             adapter = courseAdapter
             setHasFixedSize(true)
         }

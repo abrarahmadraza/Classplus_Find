@@ -10,6 +10,7 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             app:layout_constraintTop_toTopOf="parent"
+            app:iconifiedByDefault="false"
             app:layout_constraintStart_toStartOf="parent"
             android:backgroundTint="@color/gray91"
             android:layout_margin="16dp"
@@ -31,6 +32,7 @@
             app:layout_constraintTop_toTopOf="parent" >
 
             <TextView
+                android:id="@+id/distance"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
