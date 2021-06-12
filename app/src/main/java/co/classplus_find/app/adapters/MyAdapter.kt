@@ -40,8 +40,8 @@ class MyAdapter(list: ArrayList<DataSnapshot>, c: Context) :
         }else{
             holder.sent.visibility=View.GONE
             holder.received.visibility=View.VISIBLE
-            holder.text2.text=msg
-            holder.date2.text=date
+            holder.text1.text=msg
+            holder.date1.text=date
         }
     }
 

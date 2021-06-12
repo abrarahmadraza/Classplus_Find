@@ -138,7 +138,7 @@ class SearchFragment : Fragment() {
                                         .error(R.drawable.profile_pic)
                                         .into(view.findViewById<CircularImageView>(R.id.pic))
                                 }
-                                view.findViewById<Button>(R.id.chat)
+                                view.findViewById<ImageView>(R.id.chat)
                                     .setOnClickListener {
                                         var arr=ArrayList<String>()
                                         FirebaseAuth.getInstance()?.currentUser?.uid?.let { it1 ->

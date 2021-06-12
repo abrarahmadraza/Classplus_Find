@@ -2,6 +2,7 @@ package co.classplus_find.app.ui.tutor
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import co.classplus_find.app.MainActivity
 import co.classplus_find.app.R
 import co.classplus_find.app.adapters.TagsAdapter
 import co.classplus_find.app.data.PreferenceHelper
@@ -73,6 +75,16 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
 
     private fun setupListeners(){
         setupEdit()
+
+        binding.batches.setOnClickListener {
+            val intent = Intent(requireContext(), BatchActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.courses.setOnClickListener {
+            val intent = Intent(requireContext(), CourseActivity::class.java)
+            startActivity(intent)
+        }
 
         ref!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

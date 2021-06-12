@@ -57,7 +57,7 @@ class ChatFragment: Fragment() {
         ref = FirebaseDatabase.getInstance()
             .getReference("chats")
         var uid:String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        ref?.addListenerForSingleValueEvent(object:ValueEventListener{
+        ref?.addValueEventListener(object:ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
@@ -107,7 +107,7 @@ class ChatFragment: Fragment() {
                         .error(R.drawable.profile_pic)
                         .into(view.findViewById<CircularImageView>(R.id.pic))
                 }
-                view.findViewById<Button>(R.id.chat).visibility=View.GONE
+                view.findViewById<ImageView>(R.id.chat).visibility=View.GONE
                 view.findViewById<ConstraintLayout>(R.id.parent)
                     .setOnClickListener {
                         var arr=ArrayList<String>()

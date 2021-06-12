@@ -99,4 +99,11 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         }
         return true
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        var viewPager=findViewById<ViewPager>(R.id.view_pager)
+        var fragment=supportFragmentManager.fragments.get(viewPager.currentItem)
+        fragment.onActivityResult(requestCode, resultCode, data)
+    }
 }
