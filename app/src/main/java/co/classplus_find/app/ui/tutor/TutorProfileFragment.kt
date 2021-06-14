@@ -76,12 +76,13 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
         if(arguments?.getString(TimelineFragment.PARAM_UID) != null){
             uid = arguments?.getString(TimelineFragment.PARAM_UID)
             ref = FirebaseDatabase.getInstance()
-                .getReference("users/" +uid+"/"+role)
+                .getReference("users/" +uid+"/"+"teacher")
             binding.apply {
                 aboutEdit.visibility = View.GONE
                 eduEdit.visibility = View.GONE
                 addTag.visibility = View.GONE
                 nameEdit.visibility = View.GONE
+                editContact.visibility = View.GONE
             }
             showAction = 1
         }
@@ -159,7 +160,6 @@ class TutorProfileFragment : Fragment(),TagsAdapter.OnTagRemoved {
                     binding.email?.text=user?.email.toString()
 
                 }else{
-
                     ref?.child("name")?.setValue(user?.displayName.toString())
                     ref?.child("photoUrl")?.setValue(user?.photoUrl.toString())
                     ref?.child("phone")?.setValue("Enter phone number")

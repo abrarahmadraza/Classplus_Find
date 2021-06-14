@@ -36,10 +36,8 @@ class Details : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        if(supportFragmentManager.backStackEntryCount == 0){
-            findViewById<FrameLayout>(R.id.frame).visibility = View.GONE
-        }
+    override fun onResume() {
+        super.onResume()
+        findViewById<FrameLayout>(R.id.frame).visibility = View.GONE
     }
 }

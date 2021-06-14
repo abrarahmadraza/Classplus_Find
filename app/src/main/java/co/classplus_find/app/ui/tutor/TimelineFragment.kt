@@ -50,6 +50,7 @@ class TimelineFragment: Fragment() {
     var postAdapter: TutorPostAdapter? = null
     var postList: ArrayList<TutorPostModel> = ArrayList()
 
+    var uid:String? = null
     var isUploading=false
     var downloadUrl=""
 
@@ -220,13 +221,15 @@ class TimelineFragment: Fragment() {
         role=if(mPrefs.getInt(PreferenceHelper.PREF_IS_TUTOR,-1) == 1) "teacher" else "student"
 
         if(arguments?.getString(PARAM_UID) != null){
+            uid = arguments?.getString(PARAM_UID)
             ref = FirebaseDatabase.getInstance()
-                .getReference("users/" + arguments?.getString(PARAM_UID)+"/"+role)
+                .getReference("users/" +uid +"/"+"teacher")
             binding.addPost1.visibility = View.GONE
         }
         else {
+            uid = FirebaseAuth.getInstance().currentUser!!.uid
             ref = FirebaseDatabase.getInstance()
-                .getReference("users/" + FirebaseAuth.getInstance().currentUser!!.uid + "/" + role)
+                .getReference("users/" +uid+ "/" + role)
         }
 
         user= FirebaseAuth.getInstance().currentUser

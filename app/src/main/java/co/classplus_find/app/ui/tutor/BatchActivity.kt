@@ -16,12 +16,13 @@ import co.classplus_find.app.data.models.BatchModel
 import co.classplus_find.app.databinding.ActivityBatchBinding
 import co.classplus_find.app.databinding.FragmentTutorProfileBinding
 import co.classplus_find.app.ui.tutor.TutorProfileFragment.Companion.PARAM_UID
+import co.classplus_find.app.util.toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 
-class BatchActivity : AppCompatActivity() {
+class BatchActivity : AppCompatActivity(),BatchAdapter.OnBatchJoined {
 
     lateinit var binding: ActivityBatchBinding
     lateinit var batchAdapter: BatchAdapter
@@ -118,5 +119,9 @@ class BatchActivity : AppCompatActivity() {
         batchList.add(BatchModel("11th batch","New batch for class 11", "12-10-21"))
 
         ref?.child("batches")?.setValue(batchList)
+    }
+
+    override fun onBatchJoined(batchList: BatchModel, adapterPosition: Int) {
+        this.toast("Joined "+batchList.name)
     }
 }

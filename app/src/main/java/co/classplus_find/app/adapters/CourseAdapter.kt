@@ -45,7 +45,7 @@ class CourseAdapter(var context: Context, var courseList: ArrayList<CourseModel>
             desc.text = batch.description
             price.text = batch.price
 
-            if(isTutor == 1){
+            if(isTutor == 0){
                 join.visibility = View.GONE
             }
             else{

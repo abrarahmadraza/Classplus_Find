@@ -15,11 +15,12 @@ import co.classplus_find.app.data.models.BatchModel
 import co.classplus_find.app.data.models.CourseModel
 import co.classplus_find.app.databinding.ActivityBatchBinding
 import co.classplus_find.app.databinding.ActivityCourseBinding
+import co.classplus_find.app.util.toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 
-class CourseActivity : AppCompatActivity() {
+class CourseActivity : AppCompatActivity(),CourseAdapter.OnCourseBought {
 
     lateinit var binding: ActivityCourseBinding
     lateinit var courseAdapter: CourseAdapter
@@ -115,8 +116,12 @@ class CourseActivity : AppCompatActivity() {
     }
 
     private fun createPost(){
-        courseList.add(CourseModel("11th batch","New batch for class 11", "500"))
+        courseList.add(CourseModel("Introductory Physics","Basic Introduction of Physics", "500"))
 
         ref?.child("courses")?.setValue(courseList)
+    }
+
+    override fun onCourseJoined(course: CourseModel, adapterPosition: Int) {
+        this.toast("Bought "+course.name)
     }
 }

@@ -57,6 +57,19 @@
             android:textColor="#fff"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Swipe To view more about tutor"
+        android:textColor="@color/alice_blue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textFontWeight="3"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"

@@ -100,9 +100,8 @@ class StudentProfileFragment : Fragment() {
                     ref?.child("name")?.setValue(user?.displayName.toString())
                     ref?.child("photoUrl")?.setValue(user?.photoUrl.toString())
                     ref?.child("phone")?.setValue("Enter phone number")
-                    ref?.child("designation")?.setValue("Teacher")
                     ref?.child("location")?.setValue("Select Location")
-                    ref?.child("aboutMe")?.setValue("Tell us about you")
+                    ref?.child("aboutMe")?.setValue("Tell us about yourself")
                     ref?.child("currentEducation")?.setValue("Education")
 
                     var temp=FirebaseDatabase.getInstance()
